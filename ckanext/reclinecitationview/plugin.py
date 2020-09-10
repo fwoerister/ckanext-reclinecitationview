@@ -60,7 +60,7 @@ def datastore_fields(resource, valid_field_types):
             if f['type'] in valid_field_types]
 
 
-class ReclineViewBase(p.SingletonPlugin):
+class ReclineCitationViewBase(p.SingletonPlugin):
     '''
     This base class for the Recline view extensions.
     '''
@@ -96,13 +96,13 @@ class ReclineViewBase(p.SingletonPlugin):
         }
 
 
-class ReclineView(ReclineViewBase):
+class ReclineCitationView(ReclineCitationViewBase):
     '''
     This extension views resources using a Recline MultiView.
     '''
 
     def info(self):
-        return {'name': 'recline_view',
+        return {'name': 'reclinecitation_view',
                 'title': 'Data Explorer',
                 'filterable': True,
                 'icon': 'table',
@@ -123,13 +123,13 @@ class ReclineView(ReclineViewBase):
             return False
 
 
-class ReclineGridView(ReclineViewBase):
+class ReclineGridCitationView(ReclineCitationViewBase):
     '''
     This extension views resources using a Recline grid.
     '''
 
     def info(self):
-        return {'name': 'recline_grid_view',
+        return {'name': 'reclinecitation_grid_view',
                 'title': 'Grid',
                 'filterable': True,
                 'icon': 'table',
@@ -138,7 +138,7 @@ class ReclineGridView(ReclineViewBase):
                 }
 
 
-class ReclineGraphView(ReclineViewBase):
+class ReclineGraphCitationView(ReclineCitationViewBase):
     '''
     This extension views resources using a Recline graph.
     '''
@@ -171,7 +171,7 @@ class ReclineGraphView(ReclineViewBase):
             'group': [ignore_empty, in_list(self.list_datastore_fields)],
             'series': [ignore_empty, in_list(self.list_datastore_fields)]
         }
-        return {'name': 'recline_graph_view',
+        return {'name': 'reclinecitation_graph_view',
                 'title': 'Graph',
                 'filterable': True,
                 'icon': 'bar-chart-o',
@@ -183,8 +183,8 @@ class ReclineGraphView(ReclineViewBase):
     def setup_template_variables(self, context, data_dict):
         self.datastore_fields = datastore_fields(data_dict['resource'],
                                                  self.datastore_field_types)
-        vars = ReclineViewBase.setup_template_variables(self, context,
-                                                        data_dict)
+        vars = ReclineCitationViewBase.setup_template_variables(self, context,
+                                                                data_dict)
         vars.update({'graph_types': self.graph_types,
                      'graph_fields': self.datastore_fields})
         return vars
@@ -193,7 +193,7 @@ class ReclineGraphView(ReclineViewBase):
         return 'recline_graph_form.html'
 
 
-class ReclineMapView(ReclineViewBase):
+class ReclineMapCitationView(ReclineCitationViewBase):
     '''
     This extension views resources using a Recline map.
     '''
@@ -232,7 +232,7 @@ class ReclineMapView(ReclineViewBase):
             'auto_zoom': [ignore_empty],
             'cluster_markers': [ignore_empty]
         }
-        return {'name': 'recline_map_view',
+        return {'name': 'reclinecitation_map_view',
                 'title': 'Map',
                 'schema': schema,
                 'filterable': True,
@@ -248,8 +248,8 @@ class ReclineMapView(ReclineViewBase):
 
         self.datastore_fields = map_latlon_fields + map_geojson_fields
 
-        vars = ReclineViewBase.setup_template_variables(self, context,
-                                                        data_dict)
+        vars = ReclineCitationViewBase.setup_template_variables(self, context,
+                                                                data_dict)
         vars.update({'map_field_types': self.map_field_types,
                      'map_latlon_fields': map_latlon_fields,
                      'map_geojson_fields': map_geojson_fields
