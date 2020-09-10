@@ -80,9 +80,9 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points='''
         [ckan.plugins]
-        reclinecitationview = ckanext.reclinecitationview.plugin:ReclineView
-        reclinecitationview_grid = ckanext.reclinecitationview.plugin:ReclineGridView
-        reclinecitationview_map = ckanext.reclinecitationview.plugin:ReclineMapView
+        reclinecitationview = ckanext.reclinecitationview.plugin:ReclineCitationView
+        reclinecitationview_grid = ckanext.reclinecitationview.plugin:ReclineGridCitationView
+        reclinecitationview_map = ckanext.reclinecitationview.plugin:ReclineMapCitationView
         
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
